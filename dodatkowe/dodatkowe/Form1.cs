@@ -23,56 +23,28 @@ namespace dodatkowe
             string bb = b.ToString();
             int maxLen = Math.Max(aa.Length, bb.Length);
             int next = 0;
-            int cyfra1 = 0;
-            int cyfra2 = 0;
+
             string wynik = "";
-            for(int i = 0; i< maxLen; i++)
+            for (int i = 0; i < maxLen; i++)
             {
-                if (i < aa.Length)
-                {
-                    cyfra1 = aa[aa.Length - 1 - i] - '0';
-                }
-                else cyfra1 = 0;
-                if (i < bb.Length)
-                {
-                    cyfra2 = bb[bb.Length - 1 - i] - '0';
-                }
-                else cyfra2 = 0;
+                int cyfra1 = 0;
+                int cyfra2 = 0;
+                if (i < aa.Length) cyfra1 = aa[aa.Length - 1 - i] - '0';
+                if (i < bb.Length) cyfra2 = bb[bb.Length - 1 - i] - '0';
                 int suma = cyfra1 + cyfra2 + next;
                 
-                wynik = (suma % 10) + wynik;
-                if(next > 0)
+                next = suma / 10;
+                if (aa.Length > 1 || bb.Length > 1)
                 {
-                    wynik = next + wynik;
+                   wynik = (suma % 10) + wynik;
+                }
+                else
+                {
+                    wynik = suma.ToString();
                 }
 
             }
             return wynik;
-
-            /*
-            string liczba1 = a.ToString();
-            string liczba2 = b.ToString();
-            int maxLength = Math.Max(liczba1.Length, liczba2.Length);
-            int carry = 0;
-            string wynik = "";
-
-            for (int i = 0; i < maxLength; i++)
-            {
-                int cyfra1 = i < liczba1.Length ? liczba1[liczba1.Length - 1 - i] - '0' : 0;
-                int cyfra2 = i < liczba2.Length ? liczba2[liczba2.Length - 1 - i] - '0' : 0;
-                int suma = cyfra1 + cyfra2 + carry;
-                carry = suma / 10;
-                wynik = (suma % 10) + wynik;
-            }
-
-            if (carry > 0)
-            {
-                wynik = carry + wynik;
-            }
-
-            return wynik;
-            */
         }
-
     }
 }
