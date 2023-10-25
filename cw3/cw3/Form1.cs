@@ -9,7 +9,7 @@ namespace cw3
 
         }
 
-        private void start_Click(object sender, EventArgs e)
+        private void tbB_Click(object sender, EventArgs e)
         {
             int[] tab = { 8, 7, 2, 5, 4 };
 
