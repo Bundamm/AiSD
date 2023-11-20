@@ -23,20 +23,59 @@ namespace WinFormsApp1
             w2.Add(w6);
             w3.Add(w4);
             w4.Add(w5);
+            depth(w1);
         }
         void depth(Wezel2 s)
         {
 
-            napis += " " + s.wartosc.ToString();
-            
-            do
-            {
-                for (int i = 0; i < w.dzieci.Count; i++)
-                {
-                    depth(s.sasiad[i]);
-                }
-            } while(v)
+            /*
+           // Queue<Wezel2> kolejka = new Queue<Wezel2>();
+            List<Wezel2> usuniete = new List<Wezel2>();
 
+            usuniete.Add(s);
+           // kolejka.Enqueue(s);
+            while(kolejka.Count > 0)
+            {
+
+                //Wezel2 aktualny = kolejka.Dequeue();
+                napis += " " + aktualny.wartosc;
+                foreach (var sasiad in aktualny.sasiad)
+                {
+                    if (!usuniete.Contains(sasiad))
+                    {
+                       // kolejka.Enqueue(sasiad);
+                        usuniete.Add(sasiad);
+                    }
+                    
+                }
+            }
+            */
+            List<Wezel2> stos = new List<Wezel2>();
+            List<Wezel2> usuniete = new List<Wezel2>();
+            stos.Add(s);
+            while(stos.Count > 0)
+            {
+                Wezel2 aktualny = stos[stos.Count -1];
+                stos.RemoveAt(stos.Count - 1);
+                
+                if (!usuniete.Contains(aktualny))
+                {
+                    napis += " " + aktualny.wartosc;
+                    usuniete.Add(aktualny);
+                    foreach(var sasiad in aktualny.sasiad)
+                    {
+                        if (!usuniete.Contains(sasiad))
+                        {
+                            stos.Add(sasiad);
+                        }
+                    }
+                }
+                
+   
+            }
+
+
+            MessageBox.Show(napis);
 
         }
     }

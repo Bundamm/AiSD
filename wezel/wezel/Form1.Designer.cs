@@ -28,30 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.start = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            start = new Button();
+            SuspendLayout();
             // 
             // start
             // 
-            this.start.Location = new System.Drawing.Point(335, 193);
-            this.start.Name = "start";
-            this.start.Size = new System.Drawing.Size(75, 23);
-            this.start.TabIndex = 0;
-            this.start.Text = "start";
-            this.start.UseVisualStyleBackColor = true;
-            this.start.Click += new System.EventHandler(this.start_Click);
+            start.Location = new Point(23, 12);
+            start.Name = "start";
+            start.Size = new Size(75, 23);
+            start.TabIndex = 0;
+            start.Text = "start";
+            start.UseVisualStyleBackColor = true;
+            start.Click += start_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.start);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(120, 37);
+            Controls.Add(start);
+            Name = "Form1";
+            Text = "Form1";
+            Load += Form1_Load;
+            ResumeLayout(false);
         }
 
         #endregion

@@ -16,7 +16,7 @@ namespace wezel
         private void start_Click(object sender, EventArgs e)
         {
             var w1 = new Wezel(5);
-            
+
             var w2 = new Wezel(3);
             var w3 = new Wezel(1);
             var w4 = new Wezel(2);
@@ -39,9 +39,9 @@ namespace wezel
             {
                 A(w.dzieci[i]);
             }
-            
+
         }
     }
 
-    
+
 }
