@@ -66,33 +66,9 @@ namespace WinFormsApp1
                     
                 }
             }
-            */
-            /*
-            List<Wezel2> stos = new List<Wezel2>();
-            List<Wezel2> usuniete = new List<Wezel2>();
-            stos.Add(s);
-            while(stos.Count > 0)
-            {
-                Wezel2 aktualny = stos[stos.Count -1];
-                stos.RemoveAt(stos.Count - 1);
-                
-                if (!usuniete.Contains(aktualny))
-                {
-                    napis += " " + aktualny.wartosc;
-                    usuniete.Add(aktualny);
-                    foreach(var sasiad in aktualny.sasiad)
-                    {
-                        if (!usuniete.Contains(sasiad))
-                        {
-                            stos.Add(sasiad);
-                        }
-                    }
-                }
-                
-   
-            }
-            */
+            */ 
 
         }
+
     }
 }
