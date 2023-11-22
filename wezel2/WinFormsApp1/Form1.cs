@@ -3,6 +3,7 @@ namespace WinFormsApp1
     public partial class Form1 : Form
     {
         string napis = "";
+        List<Wezel2> odwiedzone = new();
         public Form1()
         {
             InitializeComponent();
@@ -23,10 +24,26 @@ namespace WinFormsApp1
             w2.Add(w6);
             w3.Add(w4);
             w4.Add(w5);
+            napis = "";
+            // Odwiedzone te¿ trzeba czyœciæ
+            odwiedzone.Clear();
             depth(w1);
+            MessageBox.Show(napis);
         }
         void depth(Wezel2 s)
         {
+
+            odwiedzone.Add(s);
+
+            napis += s.wartosc.ToString() + " ";
+
+            foreach (var sasiad in s.sasiad)
+            {
+                if (!odwiedzone.Contains(sasiad))
+                {
+                    depth(sasiad);
+                }
+            }
 
             /*
            // Queue<Wezel2> kolejka = new Queue<Wezel2>();
@@ -50,6 +67,7 @@ namespace WinFormsApp1
                 }
             }
             */
+            /*
             List<Wezel2> stos = new List<Wezel2>();
             List<Wezel2> usuniete = new List<Wezel2>();
             stos.Add(s);
@@ -73,9 +91,7 @@ namespace WinFormsApp1
                 
    
             }
-
-
-            MessageBox.Show(napis);
+            */
 
         }
     }
