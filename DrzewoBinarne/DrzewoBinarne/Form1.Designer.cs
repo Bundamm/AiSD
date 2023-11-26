@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             start = new Button();
-            label1 = new Label();
+            tbInput = new TextBox();
             SuspendLayout();
             // 
             // start
@@ -42,22 +42,19 @@
             start.UseVisualStyleBackColor = true;
             start.Click += start_Click;
             // 
-            // label1
+            // tbInput
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(368, 214);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 1;
-            label1.Text = "label1";
-            label1.Click += label1_Click;
+            tbInput.Location = new Point(332, 218);
+            tbInput.Name = "tbInput";
+            tbInput.Size = new Size(100, 23);
+            tbInput.TabIndex = 1;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(label1);
+            Controls.Add(tbInput);
             Controls.Add(start);
             Name = "Form1";
             Text = "Form1";
@@ -68,6 +65,6 @@
         #endregion
 
         private Button start;
-        private Label label1;
+        private TextBox tbInput;
     }
 }
