@@ -35,7 +35,7 @@ namespace lab2
                 wyrazy[i] = wyrazy[i - 1] + wyrazy[i - 2];
             }
             // robimy tutaj jeszcze raz t¹ operacjê bo pêtla siê koñczy przed pi¹tym elementem którego chcemy wyliczyæ i to zwracamy, jeœli nie jest n+1 w new.
-            //            return wyrazy[n - 1] + wyrazy[n - 2
+            //            return wyrazy[n - 1] + wyrazy[n - 2]
             return wyrazy[n];
         }
         
