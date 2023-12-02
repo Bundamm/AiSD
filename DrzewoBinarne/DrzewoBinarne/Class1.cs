@@ -7,72 +7,161 @@ using static DrzewoBinarne.Form1;
 
 namespace DrzewoBinarne
 {
-    public class DrzewoBinarne
-    {
-        public Węzeł3 korzeń;
-        public int liczbaWęzłów;
+	public class Wezel3
+	{
+		public int wartosc;
+		public Wezel3 rodzic;
+		public Wezel3 leweDziecko;
+		public Wezel3 praweDziecko;
+		public Wezel3(int liczba)
+		{
+			this.wartosc = liczba;
+		}
+		public void Add(int liczba)
+		{
+			var dziecko = new Wezel3(liczba);
+			dziecko.rodzic = this;
+			if (liczba < this.wartosc)
+			{
+				this.leweDziecko = dziecko;
+			}
+			else
+			{
+				this.praweDziecko = dziecko;
+			}
+		}
+	}
+	public class drzewoBinarne
+	{
+		public Wezel3 korzen;
+		public int liczbaWezlow = 0;
+		public drzewoBinarne(Wezel3 korzen)
+		{
+			this.korzen = korzen;
+		}
 
-        public DrzewoBinarne(int liczba)
-        {
-            this.korzeń = new Węzeł3(liczba);
-            this.liczbaWęzłów = 1;
-        }
-
-        void Add(int liczba)
-        {
-            Węzeł3 rodzic = this.znajdzRodzica(liczba);
-            rodzic.AddDziecko(liczba);
-        }
-
-        public Węzeł3 znajdzRodzica(int liczba)
-        {
-
-            var w = this.korzeń;
-            while (true)
-            {
-                if (liczba < w.wartosc)
-                {
-                    if (w.leweDziecko != null)
-                    {
-                        w = w.leweDziecko;
-                    }
-                    else return w;
-                }
-                else
-                {
-                    if (w.praweDziecko != null)
-                    {
-                        w = w.praweDziecko;
-                    }
-                    else return w;
-                }
-            }
-        }
-    }
-
-
-    public class Węzeł3
-    {
-        public int wartosc;
-        public Węzeł3 leweDziecko;
-        public Węzeł3 praweDziecko;
-        public Węzeł3 rodzic;
-        public Węzeł3(int wartosc)
-        {
-            this.wartosc = wartosc;
-        }
-
-        
-        public void Add(int liczba)
-        {
-            var dziecko = new Węzeł3(liczba);
-            dziecko.korzen = this;
-            if(liczba < this.wartosc)
-            {
-                this.leweDziecko = dziecko;
-            }
-            else 
-                this.praweDziecko = dziecko;
-        }
-    }
+		public void Add(int liczba)
+		{
+			if(korzen == null)
+			{
+				korzen = new Wezel3(liczba);
+				return;
+			}
+			var rodzic = this.znajdzRodzica(liczba);
+			rodzic.Add(liczba);
+			liczbaWezlow++;
+		}
+		public Wezel3 znajdzRodzica(int liczba)
+		{
+			var w = this.korzen;
+			while (true)
+			{
+				if (liczba < w.wartosc)
+				{
+					if (w.leweDziecko != null)
+					{
+						w = w.leweDziecko;
+					}
+					else
+					{
+						return w;
+					}
+				}
+				else
+				{
+					if (w.praweDziecko != null)
+					{
+						w = w.praweDziecko;
+					}
+					else
+					{
+						return w;
+					}
+				}
+			}
+		}
+		public Wezel3 znajdzNajmniejszy(Wezel3 b)
+		{
+			var w = b;
+			while (w.leweDziecko != null)
+			{
+				w = w.leweDziecko;
+			}
+			return w;
+		}
+		public Wezel3 znajdzNajwiekszy(Wezel3 b)
+		{
+			var w = b;
+			while (w.praweDziecko != null)
+			{
+				w = w.praweDziecko;
+			}
+			return w;
+		}
+		public Wezel3 znajdz(int liczba)
+		{
+			var w = this.korzen;
+			if (w.wartosc == liczba) return w;
+			while (true)
+			{
+				if(liczba < w.wartosc)
+				{
+					if (w.leweDziecko != null)
+					{
+						w = w.leweDziecko;
+						if (w.wartosc == liczba)
+						{
+							return w;
+						}
+					}
+					else
+					{
+						return null;
+					}
+				}
+				else
+				{
+					if(w.praweDziecko != null)
+					{
+						w = w.praweDziecko;
+						if(w.wartosc == liczba)
+						{
+							return w;
+						}
+						
+					}
+					else
+					{
+						return null;
+					}
+				}
+			}
+		}
+		public Wezel3 nastepnik(Wezel3 w)
+		{
+			if(w.praweDziecko != null)
+			{
+				return znajdzNajmniejszy(w.praweDziecko);
+			}
+			if (w.rodzic == null) return null;
+			while(w == w.rodzic.praweDziecko)
+			{
+				w = w.rodzic;
+			}
+			return w.rodzic;
+		}
+		public Wezel3 poprzednik(Wezel3 w)
+		{
+			if(w.leweDziecko != null)
+			{
+				return znajdzNajwiekszy(w.leweDziecko);
+			}
+			if (w.rodzic == null) return null;
+			while(w == w.rodzic.leweDziecko)
+			{
+				w = w.rodzic;
+			}
+			return w.rodzic;
+		}
+	}
 }

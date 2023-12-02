@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             start = new Button();
-            tbInput = new TextBox();
             SuspendLayout();
             // 
             // start
             // 
-            start.Location = new Point(346, 308);
+            start.Location = new Point(350, 235);
             start.Name = "start";
             start.Size = new Size(75, 23);
             start.TabIndex = 0;
@@ -42,29 +41,19 @@
             start.UseVisualStyleBackColor = true;
             start.Click += start_Click;
             // 
-            // tbInput
-            // 
-            tbInput.Location = new Point(332, 218);
-            tbInput.Name = "tbInput";
-            tbInput.Size = new Size(100, 23);
-            tbInput.TabIndex = 1;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(tbInput);
             Controls.Add(start);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Button start;
-        private TextBox tbInput;
     }
 }
