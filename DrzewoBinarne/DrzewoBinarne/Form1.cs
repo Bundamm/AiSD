@@ -17,7 +17,9 @@ namespace DrzewoBinarne
 			drzewo.Add(5);
 			drzewo.Add(3);
 			drzewo.Add(8);
-			var x = drzewo.nastepnik(drzewo.korzen.praweDziecko.leweDziecko.praweDziecko);
+			drzewo.Add(11);
+			var x = drzewo.nastepnik(drzewo.korzen.leweDziecko.praweDziecko);
+
 			var y = drzewo.poprzednik(drzewo.korzen.praweDziecko);
 		}
 		int[] convertInt(string napis)

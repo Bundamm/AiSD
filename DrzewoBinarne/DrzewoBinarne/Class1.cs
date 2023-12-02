@@ -144,9 +144,11 @@ namespace DrzewoBinarne
 				return znajdzNajmniejszy(w.praweDziecko);
 			}
 			if (w.rodzic == null) return null;
+
 			while(w == w.rodzic.praweDziecko)
 			{
 				w = w.rodzic;
+				if (w.rodzic == null) return null;
 			}
 			return w.rodzic;
 		}
@@ -160,6 +162,7 @@ namespace DrzewoBinarne
 			while(w == w.rodzic.leweDziecko)
 			{
 				w = w.rodzic;
+				if (w.rodzic == null) return null;
 			}
 			return w.rodzic;
 		}
