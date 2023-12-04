@@ -51,6 +51,7 @@
             a.Name = "a";
             a.Size = new Size(120, 23);
             a.TabIndex = 1;
+            a.ValueChanged += a_ValueChanged;
             // 
             // b
             // 

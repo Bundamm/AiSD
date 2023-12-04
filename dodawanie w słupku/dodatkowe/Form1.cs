@@ -32,11 +32,19 @@ namespace dodatkowe
                 if (i < aa.Length) cyfra1 = aa[aa.Length - 1 - i] - '0';
                 if (i < bb.Length) cyfra2 = bb[bb.Length - 1 - i] - '0';
                 int suma = cyfra1 + cyfra2 + next;
-                
+
                 next = suma / 10;
                 if (aa.Length > 1 || bb.Length > 1)
                 {
-                   wynik = (suma % 10) + wynik;
+                    if (i == maxLen-1)
+                    {
+                        wynik = suma + wynik;
+                    }
+                        
+                    else
+                    {
+                       wynik = (suma % 10) + wynik;
+                    }
                 }
                 else
                 {
@@ -45,6 +53,11 @@ namespace dodatkowe
 
             }
             return wynik;
+        }
+
+        private void a_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
