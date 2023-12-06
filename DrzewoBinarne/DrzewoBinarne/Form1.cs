@@ -18,9 +18,8 @@ namespace DrzewoBinarne
 			drzewo.Add(3);
 			drzewo.Add(8);
 			drzewo.Add(11);
-			var x = drzewo.nastepnik(drzewo.korzen.leweDziecko.praweDziecko);
-
-			var y = drzewo.poprzednik(drzewo.korzen.praweDziecko);
+			var x = drzewo.Nastepnik(drzewo.korzen.leweDziecko.praweDziecko);
+			var y = drzewo.Poprzednik(drzewo.korzen.praweDziecko);
 		}
 		int[] convertInt(string napis)
 		{
@@ -31,6 +30,30 @@ namespace DrzewoBinarne
 				liczby[i] = int.Parse(liczbyS[i]);
 			}
 			return liczby;
+		}
+
+		private void button1_Click(object sender, EventArgs e) { 
+
+
+			var w1 = new Wezel3(5);
+			var d = new drzewoBinarne(w1);
+			d.Add(4);
+			d.Add(3);
+			d.Add(8);
+			d.Add(7);
+			d.Add(9);
+			d.Add(2);
+			d.Add(2);
+
+			var w = d.ZnajdzNajmniejszy(d.korzen);
+			while (w != null)
+				w = d.Nastepnik(w);
+
+		}
+
+		private void start_Click_1(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

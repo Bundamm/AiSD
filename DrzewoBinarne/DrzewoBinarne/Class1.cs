@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using static DrzewoBinarne.Form1;
@@ -38,13 +39,18 @@ namespace DrzewoBinarne
 		public drzewoBinarne(Wezel3 korzen)
 		{
 			this.korzen = korzen;
+
+		}
+		public override string ToString()
+		{
+			return this.korzen.ToString();
 		}
 
 		public void Add(int liczba)
 		{
-			if(korzen == null)
+			if(this.korzen == null)
 			{
-				korzen = new Wezel3(liczba);
+				this.korzen = new Wezel3(liczba);
 				return;
 			}
 			var rodzic = this.znajdzRodzica(liczba);
@@ -80,91 +86,83 @@ namespace DrzewoBinarne
 				}
 			}
 		}
-		public Wezel3 znajdzNajmniejszy(Wezel3 b)
+		public Wezel3 ZnajdzNajmniejszy(Wezel3 b)
 		{
-			var w = b;
-			while (w.leweDziecko != null)
-			{
-				w = w.leweDziecko;
-			}
-			return w;
+			while (b.leweDziecko != null) 
+				b = b.leweDziecko;
+			return b;
 		}
-		public Wezel3 znajdzNajwiekszy(Wezel3 b)
+		public Wezel3 ZnajdzNajwiekszy(Wezel3 b)
 		{
-			var w = b;
-			while (w.praweDziecko != null)
-			{
-				w = w.praweDziecko;
-			}
-			return w;
+			while (b.praweDziecko != null)
+				b = b.praweDziecko;
+
+			return b;
 		}
-		public Wezel3 znajdz(int liczba)
+		public Wezel3 Znajdz(int liczba)
 		{
 			var w = this.korzen;
-			if (w.wartosc == liczba) return w;
+			
 			while (true)
 			{
-				if(liczba < w.wartosc)
+				if (w.wartosc == liczba) 
+					return w;
+				if (liczba < w.wartosc)
 				{
-					if (w.leweDziecko != null)
-					{
+					if (w.leweDziecko != null) 
 						w = w.leweDziecko;
-						if (w.wartosc == liczba)
-						{
-							return w;
-						}
-					}
-					else
-					{
+					else 
 						return null;
-					}
 				}
 				else
 				{
-					if(w.praweDziecko != null)
-					{
+					if(w.praweDziecko != null) 
 						w = w.praweDziecko;
-						if(w.wartosc == liczba)
-						{
-							return w;
-						}
-						
-					}
-					else
-					{
+					else 
 						return null;
-					}
 				}
 			}
 		}
-		public Wezel3 nastepnik(Wezel3 w)
+		public Wezel3 Nastepnik(Wezel3 w)
 		{
 			if(w.praweDziecko != null)
 			{
-				return znajdzNajmniejszy(w.praweDziecko);
+				return this.ZnajdzNajmniejszy(w.praweDziecko);
+			}			
+			while(w.rodzic != null)
+			{
+                if (w.rodzic.leweDziecko == w)
+				{
+                    return w.rodzic;
+                }
+                w = w.rodzic;
 			}
-			if (w.rodzic == null) return null;
+			return null;
 
-			while(w == w.rodzic.praweDziecko)
-			{
-				w = w.rodzic;
-				if (w.rodzic == null) return null;
-			}
-			return w.rodzic;
 		}
-		public Wezel3 poprzednik(Wezel3 w)
+
+		public Wezel3 Poprzednik(Wezel3 w)
 		{
-			if(w.leweDziecko != null)
-			{
-				return znajdzNajwiekszy(w.leweDziecko);
-			}
-			if (w.rodzic == null) return null;
-			while(w == w.rodzic.leweDziecko)
-			{
-				w = w.rodzic;
-				if (w.rodzic == null) return null;
-			}
-			return w.rodzic;
-		}
+            if (w.leweDziecko != null)
+            {
+                return this.ZnajdzNajwiekszy(w.praweDziecko);
+            }
+            while (w.rodzic != null)
+            {
+                if (w.rodzic.praweDziecko == w)
+                {
+                    return w.rodzic;
+                }
+                w = w.rodzic;
+            }
+            return null;
+        }
+
+		//public Wezel3 Usun(Wezel3 w)
+		//{
+			//gdy nie ma dzieci, to odwiazujemy wezel
+			//gdy jest jedno dziecko to wchodzi na miejsce rodzica
+			//gdy jest dwoje dzieci, używam losowo następnika bądź poprzednika o boże
+		//}
 	}
 }

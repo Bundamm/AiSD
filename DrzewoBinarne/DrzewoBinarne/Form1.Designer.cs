@@ -28,32 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            start = new Button();
-            SuspendLayout();
+            this.start = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
             // 
             // start
             // 
-            start.Location = new Point(350, 235);
-            start.Name = "start";
-            start.Size = new Size(75, 23);
-            start.TabIndex = 0;
-            start.Text = "Start";
-            start.UseVisualStyleBackColor = true;
-            start.Click += start_Click;
+            this.start.Location = new System.Drawing.Point(395, 211);
+            this.start.Name = "start";
+            this.start.Size = new System.Drawing.Size(75, 23);
+            this.start.TabIndex = 0;
+            this.start.Text = "Start";
+            this.start.UseVisualStyleBackColor = true;
+            this.start.Click += new System.EventHandler(this.start_Click_1);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(395, 161);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(start);
-            Name = "Form1";
-            Text = "Form1";
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.start);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
 
         private Button start;
+        private Button button1;
     }
 }
