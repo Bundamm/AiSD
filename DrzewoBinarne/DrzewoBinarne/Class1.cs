@@ -131,11 +131,11 @@ namespace DrzewoBinarne
 			}			
 			while(w.rodzic != null)
 			{
-                if (w.rodzic.leweDziecko == w)
+				if (w.rodzic.leweDziecko == w)
 				{
-                    return w.rodzic;
-                }
-                w = w.rodzic;
+					return w.rodzic;
+				}
+				w = w.rodzic;
 			}
 			return null;
 
@@ -143,20 +143,20 @@ namespace DrzewoBinarne
 
 		public Wezel3 Poprzednik(Wezel3 w)
 		{
-            if (w.leweDziecko != null)
-            {
-                return this.ZnajdzNajwiekszy(w.praweDziecko);
-            }
-            while (w.rodzic != null)
-            {
-                if (w.rodzic.praweDziecko == w)
-                {
-                    return w.rodzic;
-                }
-                w = w.rodzic;
-            }
-            return null;
-        }
+			if (w.leweDziecko != null)
+			{
+				return this.ZnajdzNajwiekszy(w.praweDziecko);
+			}
+			while (w.rodzic != null)
+			{
+				if (w.rodzic.praweDziecko == w)
+				{
+					return w.rodzic;
+				}
+				w = w.rodzic;
+			}
+			return null;
+		}
 
 		//public Wezel3 Usun(Wezel3 w)
 		//{
@@ -164,5 +164,74 @@ namespace DrzewoBinarne
 			//gdy jest jedno dziecko to wchodzi na miejsce rodzica
 			//gdy jest dwoje dzieci, używam losowo następnika bądź poprzednika o boże
 		//}
+		public Wezel3 Usun(Wezel3 w)
+		{
+			if(w.leweDziecko == null && w.praweDziecko == null)
+			{
+				if(w == null)
+				{
+					korzen = null;
+					return w;
+				}
+				else
+				{
+					if (w.rodzic.leweDziecko == w)
+					{
+						w.rodzic.leweDziecko = null;
+						return w;
+					}
+					if (w.rodzic.praweDziecko == w)
+					{
+						w.rodzic.praweDziecko = null;
+						return w;
+					}
+				}
+					
+			}
+			if(w.leweDziecko != null && w.praweDziecko == null)
+			{
+				Zamien(w, w.leweDziecko);
+				return w;
+			}
+			if(w.leweDziecko == null && w.praweDziecko != null)
+			{
+				Zamien(w, w.praweDziecko);
+				return w;
+			}
+			else
+			{
+				Wezel3 next = Nastepnik(w);
+				w.wartosc = next.wartosc;
+				return Usun(next);
+			}
+		}
+		public void Zamien(Wezel3 stary, Wezel3 nowy)
+		{
+			nowy.rodzic = stary.rodzic;
+			if(stary.rodzic == null)
+			{
+				korzen = nowy;
+				if(nowy != null)
+				{
+					nowy.rodzic = null;
+				}
+			}
+			else
+			{
+				if(stary.rodzic.leweDziecko == stary)
+				{
+					stary.rodzic.leweDziecko = nowy;
+				}
+				else
+				{
+					stary.rodzic.praweDziecko = nowy;
+				}
+				if(nowy!= null)
+				{
+					nowy.rodzic = stary.rodzic;
+				}
+
+			}
+		}
 	}
 }
