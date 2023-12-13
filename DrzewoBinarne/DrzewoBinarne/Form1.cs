@@ -20,6 +20,7 @@ namespace DrzewoBinarne
 			drzewo.Add(11);
 			var x = drzewo.Nastepnik(drzewo.korzen.leweDziecko.praweDziecko);
 			var y = drzewo.Poprzednik(drzewo.korzen.praweDziecko);
+			drzewo.Usun(drzewo.korzen.praweDziecko.praweDziecko);
 		}
 		int[] convertInt(string napis)
 		{
@@ -48,11 +49,8 @@ namespace DrzewoBinarne
 			var w = d.ZnajdzNajmniejszy(d.korzen);
 			while (w != null)
 				w = d.Nastepnik(w);
-
-		}
-
-		private void start_Click_1(object sender, EventArgs e)
-		{
+			var buh = d.korzen.praweDziecko.praweDziecko;
+            d.Usun(buh);
 
 		}
 	}

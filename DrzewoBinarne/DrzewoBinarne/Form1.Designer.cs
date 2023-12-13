@@ -40,7 +40,6 @@
             this.start.TabIndex = 0;
             this.start.Text = "Start";
             this.start.UseVisualStyleBackColor = true;
-            this.start.Click += new System.EventHandler(this.start_Click_1);
             // 
             // button1
             // 

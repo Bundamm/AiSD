@@ -31,6 +31,15 @@ namespace DrzewoBinarne
 				this.praweDziecko = dziecko;
 			}
 		}
+		public int IleDzieci()
+		{
+			int wynik = 0;
+			if (this.leweDziecko != null)
+				wynik++;
+			if (this.praweDziecko != null)
+				wynik++;
+			return wynik;
+		}
 	}
 	public class drzewoBinarne
 	{
@@ -48,7 +57,7 @@ namespace DrzewoBinarne
 
 		public void Add(int liczba)
 		{
-			if(this.korzen == null)
+			if (this.korzen == null)
 			{
 				this.korzen = new Wezel3(liczba);
 				return;
@@ -88,7 +97,7 @@ namespace DrzewoBinarne
 		}
 		public Wezel3 ZnajdzNajmniejszy(Wezel3 b)
 		{
-			while (b.leweDziecko != null) 
+			while (b.leweDziecko != null)
 				b = b.leweDziecko;
 			return b;
 		}
@@ -102,34 +111,34 @@ namespace DrzewoBinarne
 		public Wezel3 Znajdz(int liczba)
 		{
 			var w = this.korzen;
-			
+
 			while (true)
 			{
-				if (w.wartosc == liczba) 
+				if (w.wartosc == liczba)
 					return w;
 				if (liczba < w.wartosc)
 				{
-					if (w.leweDziecko != null) 
+					if (w.leweDziecko != null)
 						w = w.leweDziecko;
-					else 
+					else
 						return null;
 				}
 				else
 				{
-					if(w.praweDziecko != null) 
+					if (w.praweDziecko != null)
 						w = w.praweDziecko;
-					else 
+					else
 						return null;
 				}
 			}
 		}
 		public Wezel3 Nastepnik(Wezel3 w)
 		{
-			if(w.praweDziecko != null)
+			if (w.praweDziecko != null)
 			{
 				return this.ZnajdzNajmniejszy(w.praweDziecko);
-			}			
-			while(w.rodzic != null)
+			}
+			while (w.rodzic != null)
 			{
 				if (w.rodzic.leweDziecko == w)
 				{
@@ -157,6 +166,82 @@ namespace DrzewoBinarne
 			}
 			return null;
 		}
+		public Wezel3 Usun(Wezel3 w)
+		{
+			var liczbaDzieci = w.IleDzieci();
+			switch (liczbaDzieci)
+			{
+				case 0:
+					w = this.UsunGdy0Dzieci(w);
+					break;
+				case 1:
+					w = this.UsunGdy1Dziecko(w);
+					break;
+				case 2:
+					w = this.UsunGdy2Dzieci(w);
+					break;
+			}
+			return w;
+		}
+
+		private Wezel3 UsunGdy0Dzieci(Wezel3 w)
+		{
+			if (w.rodzic == null)
+			{
+				this.korzen = null;
+				return w;
+			}
+			if (w.rodzic.leweDziecko == w)
+				w.rodzic.leweDziecko = null;
+			else
+				w.rodzic.praweDziecko = null;
+			w.rodzic = null;
+			return w;
+		}
+		private Wezel3 UsunGdy1Dziecko(Wezel3 w)
+		{
+			Wezel3 dziecko = null;
+			if (w.leweDziecko != null)
+			{
+				dziecko = w.leweDziecko;
+				w.leweDziecko = null;
+			}
+			else
+			{
+				dziecko = w.praweDziecko;
+				w.praweDziecko = null;
+			}
+			dziecko.rodzic = w.rodzic;
+			if (w.rodzic.leweDziecko == w)
+			{
+				w.rodzic.leweDziecko = dziecko;
+			}
+			else
+				w.rodzic.praweDziecko = dziecko;
+			w.rodzic = null;
+			return w;
+		}
+		private Wezel3 UsunGdy2Dzieci(Wezel3 w)
+		{
+            var zamiennik = this.Nastepnik(w);
+            zamiennik = this.Usun(zamiennik);
+            if (w.rodzic != null)
+            {
+                if (w.rodzic.leweDziecko == w)
+                    w.rodzic.leweDziecko = zamiennik;
+                else
+                    w.rodzic.praweDziecko = zamiennik;
+            }
+            zamiennik.rodzic = w.rodzic;
+            w.rodzic = null;
+            zamiennik.leweDziecko = w.leweDziecko;
+            zamiennik.leweDziecko.rodzic = zamiennik;
+            w.leweDziecko = null;
+            zamiennik.praweDziecko = w.praweDziecko;
+            zamiennik.praweDziecko.rodzic = zamiennik;
+            w.praweDziecko = null;
+            return w;
+        }
 
 		//public Wezel3 Usun(Wezel3 w)
 		//{
@@ -164,74 +249,7 @@ namespace DrzewoBinarne
 			//gdy jest jedno dziecko to wchodzi na miejsce rodzica
 			//gdy jest dwoje dzieci, używam losowo następnika bądź poprzednika o boże
 		//}
-		public Wezel3 Usun(Wezel3 w)
-		{
-			if(w.leweDziecko == null && w.praweDziecko == null)
-			{
-				if(w == null)
-				{
-					korzen = null;
-					return w;
-				}
-				else
-				{
-					if (w.rodzic.leweDziecko == w)
-					{
-						w.rodzic.leweDziecko = null;
-						return w;
-					}
-					if (w.rodzic.praweDziecko == w)
-					{
-						w.rodzic.praweDziecko = null;
-						return w;
-					}
-				}
-					
-			}
-			if(w.leweDziecko != null && w.praweDziecko == null)
-			{
-				Zamien(w, w.leweDziecko);
-				return w;
-			}
-			if(w.leweDziecko == null && w.praweDziecko != null)
-			{
-				Zamien(w, w.praweDziecko);
-				return w;
-			}
-			else
-			{
-				Wezel3 next = Nastepnik(w);
-				w.wartosc = next.wartosc;
-				return Usun(next);
-			}
-		}
-		public void Zamien(Wezel3 stary, Wezel3 nowy)
-		{
-			nowy.rodzic = stary.rodzic;
-			if(stary.rodzic == null)
-			{
-				korzen = nowy;
-				if(nowy != null)
-				{
-					nowy.rodzic = null;
-				}
-			}
-			else
-			{
-				if(stary.rodzic.leweDziecko == stary)
-				{
-					stary.rodzic.leweDziecko = nowy;
-				}
-				else
-				{
-					stary.rodzic.praweDziecko = nowy;
-				}
-				if(nowy!= null)
-				{
-					nowy.rodzic = stary.rodzic;
-				}
-
-			}
-		}
+		
+		
 	}
 }
