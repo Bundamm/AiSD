@@ -6,5 +6,10 @@ namespace Kruskal
         {
             InitializeComponent();
         }
+
+        private void start_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
